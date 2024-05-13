@@ -1,8 +1,9 @@
 var usermodel = require('../model/usermodel')
 const bcrypt = require('bcrypt');
 login_status = 0;
-exports.insert = async (req, res) => {
 
+// -------- Add User --------
+exports.insert = async (req, res) => {
 
     var data = await usermodel.find({ "email": req.body.email });
     if (data.length == 1) {
@@ -12,16 +13,17 @@ exports.insert = async (req, res) => {
     }
     else {
 
-        // if (req.body.name == "") {
-            var b_pass = await bcrypt.hash(req.body.password, 10);
-            req.body.password = b_pass
-            var data = await usermodel.create(req.body);
-            res.status(200).json({
-                data
-            })
-        }
-    // }
+        var b_pass = await bcrypt.hash(req.body.password, 10);
+        req.body.password = b_pass
+        var data = await usermodel.create(req.body);
+        res.status(200).json({
+            data
+        })
+    }
+
 }
+
+// -------- View User --------
 exports.getdata = async (req, res) => {
 
     var data = await usermodel.find();
@@ -30,6 +32,8 @@ exports.getdata = async (req, res) => {
         data
     })
 }
+
+// -------- Login User --------
 
 exports.login = async (req, res) => {
 
@@ -71,6 +75,7 @@ exports.login = async (req, res) => {
     }
 }
 
+// -------- Logout User --------
 exports.logout = async (req, res) => {
 
     login_status = 0
