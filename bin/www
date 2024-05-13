@@ -10,7 +10,7 @@ var http = require('http');
 
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://127.0.0.1:27017/EXAM-API')
+mongoose.connect('mongodb+srv://harsh9925840:harsh123@harsh.uabyvkf.mongodb.net/EXAM-API')
   .then(() => console.log('Connected!'));
 
 var port = normalizePort(process.env.PORT || '3000');
